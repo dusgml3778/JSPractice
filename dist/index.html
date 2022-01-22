@@ -6,10 +6,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   
-  <script defer="" src="/array.c4232e5d.js"></script>
+  <script defer="" src="/object.d62525e1.js"></script>
 </head>
-<body>
+<body onload="render()">
+  <table>
+      <thead>
+          <th>이름</th>
+          <th>전화번호</th>
+      </thead>
+      <tbody id="test">
 
-  <h1>Click</h1>
+      </tbody>
+  </table>
+  <script>var userList = reqUserList(); // 함수 선언 전 변수 선언은 호이스팅에 의해 허락됨 
+
+function reqUserList() {
+  // ajax를 통해 데이터를 불러왔다고 가정
+  return [{
+    name: "윾또막",
+    phone: "010-1111-1111"
+  }, {
+    name: "장꾸",
+    phone: "010-2222-2222"
+  }];
+}
+
+function makeListToDom(list) {
+  var dom = list.map(function (elem) {
+    return "<tr><td>".concat(elem.name, "</td><td>").concat(elem.phone, "</td></tr>");
+  });
+  return dom;
+}
+
+function renderList(dom) {
+  var d = dom.join('');
+  document.getElementById("test").innerHTML = d;
+}
+
+function render() {
+  var userListDom = makeListToDom(userList);
+  renderList(userListDom);
+}</script>
 </body>
 </html>
